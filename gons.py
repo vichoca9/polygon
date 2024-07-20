@@ -2,6 +2,13 @@ from math import *
 from pga import *
 # helper libs for calculating polygons and stuff
 # use complex numbers for 2D vector
+# also generator for polys
+
+def print_v(points,digits=3):
+	for v in points:
+		s=str(round(v.real,digits))
+		s+=(","+str(round(v.imag,digits))+"j")
+		print(s)
 
 # center point
 def average(points):
@@ -15,7 +22,7 @@ def average(points):
 # cross product
 def exterior(v1,v2):
     # a1*b2-b1*a2
-    return (v1.conjugate)*v2).imag
+    return ((v1.conjugate())*v2).imag
 
 def vectors_to_center(points):
     center=average(points)
@@ -46,11 +53,15 @@ def regular_area(Nsides,radius):
     return Nsides*(base*height/2)
 
 def is_regular(points):
+    epsilon=2**-8
     # if at least one distance is diferent, return false
     v_to_c=vectors_to_center(points)
     n=len(v_to_c)
+    k=0
+    #for v in v_to_c:
+    #    print(abs(v))
     while(k < n):
-        if(abs(v_to_c[k]) != abs(v_to_c[(k+1)%n])):
+        if abs(abs(v_to_c[k]) - abs(v_to_c[(k+1)%n]))>epsilon:
             return False
         k+=1
     # there are N sides, so check with N regular gon
@@ -58,5 +69,15 @@ def is_regular(points):
     # check is passed
     sides=len(points)
     radius=abs(v_to_c[0])
-    return abs(area(points))==regular_area(sides,radius)
+    #print(area(points))
+    #print(regular_area(sides,radius))
+    return abs(abs(area(points))-abs(regular_area(sides,radius)))<=epsilon
+
+def gen_polyR(Nsides,radius):
+    points=[]
+    da=2*pi/Nsides
+    a=0
+    for i in range(1,Nsides+1):
+        points.append(complex(cos(a+da*i),sin(a+da*i))*radius)
+    return points
 
