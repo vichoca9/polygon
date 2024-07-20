@@ -60,7 +60,3 @@ def is_regular(points):
     radius=abs(v_to_c[0])
     return abs(area(points))==regular_area(sides,radius)
 
-
-    
-    
-
