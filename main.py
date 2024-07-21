@@ -59,6 +59,7 @@ print("## intersections:")
 verts(p)
 print(f"## Total number: {len(p)}")
 make_csv(p,f"intersections{sides}.csv")
+print("Testing all subpolys...")
 union=p+poly
 count=0
 for r in range(3,len(union)+1):
