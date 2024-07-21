@@ -97,5 +97,6 @@ def is_in(point,list):
 
 def to_csv(points,filename):
 	file=open(filename,"w")
+	csv.writer(file).writerow(['x','y'])
 	for v in points:
 		csv.writer(file).writerow([v.real,v.imag])
