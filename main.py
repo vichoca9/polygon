@@ -70,7 +70,7 @@ print("Testing all subpolys...")
 union=p+poly
 count=0
 comb=total_combinations(union)
-print(f"Total number of combinations:{comb}")
+#print(f"Total number of combinations:{comb}")
 for r in range(3,len(union)+1):
 	print(f"r={r}")
 	for subset in itertools.combinations(union,r):

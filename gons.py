@@ -30,7 +30,8 @@ def center_equal(v_to_c,epsilon):
 # cross product
 def exterior(v1,v2):
     # a1*b2-b1*a2
-    return ((v1.conjugate())*v2).imag
+    #return ((v1.conjugate())*v2).imag
+    return (v1.real*v2.imag-v1.imag*v2.real)
 
 def vectors_to_center(points):
     center=average(points)
