@@ -43,6 +43,13 @@ else:
 def void(x,y=0):
 	return
 
+def total_combinations(union):
+	count=0
+	for r in range(3,len(union)+1):
+		for subset in itertools.combinations(union,r):
+			count+=1
+	return count
+
 #make csvs
 make_csv=void
 if("csv" in sys.argv):
@@ -62,6 +69,8 @@ make_csv(p,f"intersections{sides}.csv")
 print("Testing all subpolys...")
 union=p+poly
 count=0
+comb=total_combinations(union)
+print(f"Total number of combinations:{comb}")
 for r in range(3,len(union)+1):
 	print(f"r={r}")
 	for subset in itertools.combinations(union,r):
