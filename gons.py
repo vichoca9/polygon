@@ -1,5 +1,6 @@
 from math import *
 from pga import *
+import csv
 # helper libs for calculating polygons and stuff
 # use complex numbers for 2D vector
 # also generator for polys
@@ -93,3 +94,8 @@ def is_in(point,list):
 		if(abs(point-v)<=epsilon):
 			return True
 	return False
+
+def to_csv(points,filename):
+	file=open(filename,"w")
+	for v in points:
+		csv.writer(file).writerow([v.real,v.imag])
