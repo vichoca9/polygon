@@ -82,3 +82,7 @@ def gen_polyR(Nsides,radius):
         points.append(complex(cos(a+da*i),sin(a+da*i))*radius)
     return points
 
+def is_insideRadius(point,poly,radius):
+	center=average(poly)
+	epsilon=2**-10
+	return (radius-abs(point-center))>=epsilon

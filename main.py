@@ -14,25 +14,28 @@ def diagonals(points):
 			diags.append(l)
 	return diags
 
-def find_intersections(diags):
+def find_intersections(diags,poly,radius):
 	i=0
 	j=0
 	n=len(diags)
 	intersect=diags[0].intersect
 	points=[]
+	p=0
 	do_intersect=diags[0].do_intersect
 	for i in range(0,n):
 		for j in range(0,n):
 			if(i==j):
 				continue
 			if(do_intersect(diags[i],diags[j])):
-				points.append(intersect(diags[i],diags[j]))
+				p=intersect(diags[i],diags[j])
+				if(gons.is_insideRadius(p,poly,radius)):
+					points.append(p)
 	return points
 
 sides=int(input("Nº of sides: "))
 radius=float(input("Radius: "))
 poly=gons.gen_polyR(sides,radius)
 gons.print_v(poly)
-p=find_intersections(diagonals(poly))
+p=find_intersections(diagonals(poly),poly,radius)
 print("# intersections:")
 gons.print_v(p)
