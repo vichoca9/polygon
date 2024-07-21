@@ -4,7 +4,7 @@ from pga import *
 # use complex numbers for 2D vector
 # also generator for polys
 
-def print_v(points,digits=3):
+def print_v(points,digits=5):
 	print("# Points of polygon:")
 	for v in points:
 		s=" * "+str(round(v.real,digits))
@@ -84,5 +84,12 @@ def gen_polyR(Nsides,radius):
 
 def is_insideRadius(point,poly,radius):
 	center=average(poly)
-	epsilon=2**-10
+	epsilon=2**-8
 	return (radius-abs(point-center))>=epsilon
+
+def is_in(point,list):
+	epsilon=2**-10
+	for v in list:
+		if(abs(point-v)<=epsilon):
+			return True
+	return False

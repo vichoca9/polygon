@@ -20,7 +20,7 @@ class line():
         if(dx==0):
             self.b=0
             self.a=-1
-            self.c=v.real
+            self.c=v1.real
         # horizontal line, y intercept
         elif(dy==0):
             self.a=0

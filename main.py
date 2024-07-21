@@ -5,8 +5,8 @@ import pga
 def diagonals(points):
 	n=len(points)
 	diags=[]
-	#k+2 modulo n, n-3 points
-	for i in range(0,n):
+	#k+2 modulo n, n-2 points
+	for i in range(0,n-2):
 		for k in range(2,n-3+2):
 			v1=points[i]
 			v2=points[(i+k)%n]
@@ -23,12 +23,12 @@ def find_intersections(diags,poly,radius):
 	p=0
 	do_intersect=diags[0].do_intersect
 	for i in range(0,n):
-		for j in range(0,n):
+		for j in range(i,n):
 			if(i==j):
-				continue
+				continue #FIXME: FLOAT COMPARISONS!
 			if(do_intersect(diags[i],diags[j])):
 				p=intersect(diags[i],diags[j])
-				if(gons.is_insideRadius(p,poly,radius)):
+				if(gons.is_insideRadius(p,poly,radius) and (not gons.is_in(p,points))):
 					points.append(p)
 	return points
 
@@ -37,5 +37,6 @@ radius=float(input("Radius: "))
 poly=gons.gen_polyR(sides,radius)
 gons.print_v(poly)
 p=find_intersections(diagonals(poly),poly,radius)
-print("# intersections:")
+print("## intersections:")
 gons.print_v(p)
+print(f"## Total number: {len(p)}")
