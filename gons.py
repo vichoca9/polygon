@@ -11,7 +11,6 @@ def print_v(points,digits=5):
 		s=" * "+str(round(v.real,digits))
 		s+=(","+str(round(v.imag,digits))+"j")
 		print(s)
-
 # center point
 def average(points):
     n=len(points)
@@ -20,6 +19,13 @@ def average(points):
         avg+=v
     avg=avg/n
     return avg
+
+def center_equal(v_to_c,epsilon):
+    n=len(v_to_c)
+    for k in range(0,len(v_to_c)):
+        if abs(abs(v_to_c[k]) - abs(v_to_c[(k+1)%n]))>epsilon:
+            return False
+    return True
 
 # cross product
 def exterior(v1,v2):
@@ -56,16 +62,10 @@ def regular_area(Nsides,radius):
 
 def is_regular(points):
     epsilon=2**-8
-    # if at least one distance is diferent, return false
     v_to_c=vectors_to_center(points)
-    n=len(v_to_c)
-    k=0
-    #for v in v_to_c:
-    #    print(abs(v))
-    while(k < n):
-        if abs(abs(v_to_c[k]) - abs(v_to_c[(k+1)%n]))>epsilon:
-            return False
-        k+=1
+    # if at least one distance is diferent, return false
+    if(not center_equal(v_to_c,epsilon)):
+        return False
     # there are N sides, so check with N regular gon
     # assume first vector to center is radius, since
     # check is passed

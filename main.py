@@ -2,6 +2,7 @@ from math import *
 import gons
 import pga
 import sys
+import itertools
 
 def diagonals(points):
 	n=len(points)
@@ -58,3 +59,12 @@ print("## intersections:")
 verts(p)
 print(f"## Total number: {len(p)}")
 make_csv(p,f"intersections{sides}.csv")
+union=p+poly
+count=0
+for r in range(3,len(union)+1):
+	for subset in itertools.combinations(union,r):
+		if(gons.is_regular(subset)):
+			print(f" *** Found regular {count+1}")
+			verts(subset)
+			count+=1
+print(f"Total count: {count}")
