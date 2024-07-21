@@ -5,8 +5,9 @@ from pga import *
 # also generator for polys
 
 def print_v(points,digits=3):
+	print("# Points of polygon:")
 	for v in points:
-		s=str(round(v.real,digits))
+		s=" * "+str(round(v.real,digits))
 		s+=(","+str(round(v.imag,digits))+"j")
 		print(s)
 

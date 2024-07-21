@@ -70,11 +70,11 @@ class line():
         e12=ext[0]
         if(e12==0):
             # paralel lines
-            return [math.inf, math.inf]
-        return [ext[1]/e12,ext[2]/e12]
+            return complex(inf, inf)
+        return complex(ext[1]/e12,ext[2]/e12)
 
     def do_intersect(self,l0,l1):
-        if(intersect(l0,l1)[0]==math.inf):
+        if(self.intersect(l0,l1).real==inf):
             return False
         else:
             return True
