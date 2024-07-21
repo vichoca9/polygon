@@ -1,6 +1,7 @@
 from math import *
 import gons
 import pga
+import sys
 
 def diagonals(points):
 	n=len(points)
@@ -32,13 +33,28 @@ def find_intersections(diags,poly,radius):
 					points.append(p)
 	return points
 
-sides=int(input("Nº of sides: "))
-radius=float(input("Radius: "))
+if(len(sys.argv)==1):
+	sides=int(input("Nº of sides: "))
+	radius=float(input("Radius: "))
+else:
+	sides=int(sys.argv[1])
+	radius=float(sys.argv[2])
+def void(x,y=0):
+	return
+
+#make csvs
+make_csv=void
+if("csv" in sys.argv):
+	make_csv=gons.to_csv
+verts=gons.print_v
+#print vertices
+if("quiet" in sys.argv):
+	verts=void
 poly=gons.gen_polyR(sides,radius)
-gons.print_v(poly)
-gons.to_csv(poly,"polygon.csv")
+verts(poly)
+make_csv(poly,f"polygon{sides}.csv")
 p=find_intersections(diagonals(poly),poly,radius)
 print("## intersections:")
-gons.print_v(p)
+verts(p)
 print(f"## Total number: {len(p)}")
-gons.to_csv(p,"intersections.csv")
+make_csv(p,f"intersections{sides}.csv")
