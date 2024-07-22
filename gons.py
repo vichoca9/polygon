@@ -5,7 +5,7 @@ import csv
 # use complex numbers for 2D vector
 # also generator for polys
 
-def print_v(points,digits=5):
+def print_v(points,digits=10):
 	print("# Points of polygon:")
 	for v in points:
 		s=" * "+str(round(v.real,digits))
@@ -20,7 +20,7 @@ def average(points):
     avg=avg/n
     return avg
 
-def center_equal(v_to_c,epsilon):
+def dist_equal(v_to_c,epsilon):
     n=len(v_to_c)
     for k in range(0,len(v_to_c)):
         if abs(abs(v_to_c[k]) - abs(v_to_c[(k+1)%n]))>epsilon:
@@ -62,10 +62,10 @@ def regular_area(Nsides,radius):
     return Nsides*(base*height/2)
 
 def is_regular(points):
-    epsilon=2**-8
+    epsilon=2**-12
     v_to_c=vectors_to_center(points)
     # if at least one distance is diferent, return false
-    if(not center_equal(v_to_c,epsilon)):
+    if(not dist_equal(points,epsilon)):
         return False
     # there are N sides, so check with N regular gon
     # assume first vector to center is radius, since
@@ -86,7 +86,7 @@ def gen_polyR(Nsides,radius):
 
 def is_insideRadius(point,poly,radius):
 	center=average(poly)
-	epsilon=2**-8
+	epsilon=2**-12
 	return (radius-abs(point-center))>=epsilon
 
 def is_in(point,list):
