@@ -78,4 +78,8 @@ for r in range(3,len(union)+1):
 			print(f" *** Found regular {count+1}")
 			verts(subset)
 			count+=1
+		#else:
+		#	if(r==6):
+		#		print("ERROR!")
+		#		verts(subset)
 print(f"Total count: {count}")
